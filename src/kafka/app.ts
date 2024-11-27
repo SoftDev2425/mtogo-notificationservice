@@ -1,7 +1,7 @@
 import { emailConsumer } from '../consumers/emailConsumer';
 import { shutdownConsumers } from './consumerManager';
 
-const consumers: { disconnect: () => Promise<void>; }[] = [];
+const consumers: { disconnect: () => Promise<void> }[] = [];
 
 async function startConsumers() {
   console.log('Starting Kafka consumers...');
