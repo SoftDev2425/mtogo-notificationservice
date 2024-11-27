@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import createServer from './utils/server';
-import prisma from '../prisma/client';
-import { handlePopulateDatabase } from './utils/handlePopulateDatabase';
+import startConsumers from './kafka/app';
 
 dotenv.config();
 
@@ -16,11 +15,9 @@ async function main() {
 
 main()
   .then(async () => {
-    await prisma.$connect();
-    await handlePopulateDatabase();
+    await startConsumers();
   })
   .catch(async e => {
     console.error(e);
-    await prisma.$disconnect();
     process.exit(1);
   });
