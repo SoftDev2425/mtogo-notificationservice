@@ -150,6 +150,9 @@ export const confirmationMail = (
                         background-color: #2ecc71;
                         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                     }
+                        .orderId {
+                        font-size: 10px;
+                        }
                 </style>
             </head>
             <body>
@@ -158,8 +161,11 @@ export const confirmationMail = (
                         ${restaurantData.logoUrl ? `<img src="${restaurantData.logoUrl}" alt="${restaurantData.name} Logo" />` : ''}
                     </div>
                     <h1>Thank You for Your Order! 😋</h1>
+                    <div style="width: 100%; text-align: left; margin-bottom: 20px;">
+                    <strong class="orderId">Order ID: #${orderId}</strong>
+                    </div>
                     <p>Dear ${deliveryAddress.recipentName},</p>
-                    <p>Your order <strong>#${orderId}</strong> from <strong>${restaurantData.name}</strong> has been successfully placed. Your delicious food is on its way to the following address:</p>
+                    <p>Your order from <strong>${restaurantData.name}</strong> has been successfully placed. Your delicious food is on its way to the following address:</p>
                     
                     <h3>Delivery Address:</h3>
                     <p>${formattedAddress}</p>
@@ -185,8 +191,6 @@ export const confirmationMail = (
                     <p><strong>Location:</strong> ${restaurantData.address.street}, ${restaurantData.address.city}, ${restaurantData.address.zip}</p>
                     
                     <a href="https://www.mtogo.com/orders/${orderId}" class="cta-button">View Order Details</a>
-                    
-                    <p>If you have any questions, feel free to contact us:</p>
                     
                     <div class="footer">
                         <p>Thanks for choosing MTOGO! We hope you enjoy your meal.</p>
