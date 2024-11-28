@@ -3,7 +3,9 @@ import { createConsumer } from '../kafka/consumerManager';
 import { handleEmailDeliveryAssignment } from '../services/email.service';
 
 export async function emailDeliveryAgentAssignmentConsumer() {
-  const consumer = await createConsumer('email-delivery-agent-notification-group');
+  const consumer = await createConsumer(
+    'email-delivery-agent-notification-group',
+  );
 
   await consumer.subscribe({
     topic: 'notificationService_emailNotificationDeliveryAgent',
