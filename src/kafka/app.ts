@@ -1,4 +1,5 @@
-import { emailConsumer } from '../consumers/emailConsumer';
+import { emailDeliveryAgentAssignmentConsumer } from '../consumers/emailDeliveryAgentAssignmentConsumer';
+import { emailCustomerConfirmationConsumer } from '../consumers/emailCustomerConfirmationConsumer';
 import { shutdownConsumers } from './consumerManager';
 
 const consumers: { disconnect: () => Promise<void> }[] = [];
@@ -6,7 +7,8 @@ const consumers: { disconnect: () => Promise<void> }[] = [];
 async function startConsumers() {
   console.log('Starting Kafka consumers...');
 
-  consumers.push(await emailConsumer());
+  consumers.push(await emailCustomerConfirmationConsumer());
+  consumers.push(await emailDeliveryAgentAssignmentConsumer());
 
   console.log('All consumers started successfully');
 }

@@ -1,4 +1,4 @@
-export const confirmationMail = (
+export const customerConfirmationMail = (
   to: string,
   orderId: string,
   restaurantData: {
