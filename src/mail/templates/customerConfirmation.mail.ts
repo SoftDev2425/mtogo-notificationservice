@@ -176,7 +176,7 @@ export const customerConfirmationMail = (
                             <tr>
                                 <th>Item</th>
                                 <th>Quantity</th>
-                                <th>Price</th>
+                                <th>Price per item</th>
                             </tr>
                         </thead>
                         <tbody>

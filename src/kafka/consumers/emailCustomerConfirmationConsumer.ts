@@ -1,14 +1,12 @@
 import { EachMessagePayload } from 'kafkajs';
-import { createConsumer } from '../kafka/consumerManager';
-import { handleEmailDeliveryAssignment } from '../services/email.service';
+import { createConsumer } from '../consumerManager';
+import { handleEmailCustomerConfirmation } from '../../services/email.service';
 
-export async function emailDeliveryAgentAssignmentConsumer() {
-  const consumer = await createConsumer(
-    'email-delivery-agent-notification-group',
-  );
+export async function emailCustomerConfirmationConsumer() {
+  const consumer = await createConsumer('email-notification-group');
 
   await consumer.subscribe({
-    topic: 'notificationService_emailNotificationDeliveryAgent',
+    topic: 'emailNotification_orderCreated',
     fromBeginning: false,
   });
 
@@ -25,7 +23,7 @@ export async function emailDeliveryAgentAssignmentConsumer() {
           `EmailConsumer received message from topic: ${topic}`,
           event,
         );
-        await handleEmailDeliveryAssignment(event);
+        await handleEmailCustomerConfirmation(event);
       }
     },
   });

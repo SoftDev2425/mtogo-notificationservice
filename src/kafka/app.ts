@@ -1,6 +1,7 @@
-import { emailDeliveryAgentAssignmentConsumer } from '../consumers/emailDeliveryAgentAssignmentConsumer';
-import { emailCustomerConfirmationConsumer } from '../consumers/emailCustomerConfirmationConsumer';
+import { emailDeliveryAgentAssignmentConsumer } from './consumers/emailDeliveryAgentAssignmentConsumer';
+import { emailCustomerConfirmationConsumer } from './consumers/emailCustomerConfirmationConsumer';
 import { shutdownConsumers } from './consumerManager';
+import { emailOrderStatusUpdateConsumer } from './consumers/emailOrderStatusUpdateConsumer';
 
 const consumers: { disconnect: () => Promise<void> }[] = [];
 
@@ -9,6 +10,7 @@ async function startConsumers() {
 
   consumers.push(await emailCustomerConfirmationConsumer());
   consumers.push(await emailDeliveryAgentAssignmentConsumer());
+  consumers.push(await emailOrderStatusUpdateConsumer());
 
   console.log('All consumers started successfully');
 }
