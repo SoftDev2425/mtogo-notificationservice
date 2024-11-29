@@ -1,6 +1,6 @@
 import { EachMessagePayload } from 'kafkajs';
 import { createConsumer } from '../consumerManager';
-import { handleEmailOrderStatusUpdate } from '../../services/email.service';
+import { handleEmailDeliveryAssignment } from '../../services/email.service';
 
 export async function emailDeliveryAgentAssignmentConsumer() {
   const consumer = await createConsumer(
@@ -25,7 +25,7 @@ export async function emailDeliveryAgentAssignmentConsumer() {
           `EmailConsumer received message from topic: ${topic}`,
           event,
         );
-        await handleEmailOrderStatusUpdate(event);
+        await handleEmailDeliveryAssignment(event);
       }
     },
   });
