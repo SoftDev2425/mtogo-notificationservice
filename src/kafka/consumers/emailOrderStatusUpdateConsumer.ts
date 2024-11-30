@@ -3,9 +3,7 @@ import { createConsumer } from '../consumerManager';
 import { handleEmailOrderStatusUpdate } from '../../services/email.service';
 
 export async function emailOrderStatusUpdateConsumer() {
-  const consumer = await createConsumer(
-    'email-customer-order-status-update-notification-group',
-  );
+  const consumer = await createConsumer('mtogo-email-order-status-update');
 
   await consumer.subscribe({
     topic: 'notificationService_OrderStatusUpdate',

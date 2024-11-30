@@ -4,7 +4,7 @@ import { handleEmailDeliveryAssignment } from '../../services/email.service';
 
 export async function emailDeliveryAgentAssignmentConsumer() {
   const consumer = await createConsumer(
-    'email-delivery-agent-notification-group',
+    'mtogo-email-delivery-agent-assignment',
   );
 
   await consumer.subscribe({

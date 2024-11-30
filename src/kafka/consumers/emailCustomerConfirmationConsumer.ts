@@ -3,7 +3,7 @@ import { createConsumer } from '../consumerManager';
 import { handleEmailCustomerConfirmation } from '../../services/email.service';
 
 export async function emailCustomerConfirmationConsumer() {
-  const consumer = await createConsumer('email-notification-group');
+  const consumer = await createConsumer('mtogo-email-customer-confirmation');
 
   await consumer.subscribe({
     topic: 'emailNotification_orderCreated',

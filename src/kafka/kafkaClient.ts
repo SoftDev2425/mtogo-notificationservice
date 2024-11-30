@@ -4,8 +4,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const kafka = new Kafka({
-  clientId: 'mtogo',
-  brokers: [process.env.KAFKA_BROKER ?? 'kafka:9092', 'kafka:9093'],
+  clientId: 'mtogo-notificationservice',
+  brokers: [process.env.KAFKA_BROKER ?? 'kafka:9092'],
 });
 
 export default kafka;
