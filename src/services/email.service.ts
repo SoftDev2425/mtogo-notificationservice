@@ -2,6 +2,8 @@ import { customerConfirmationMail } from '../mail/templates/customerConfirmation
 import { deliveryAgentAssignmentMail } from '../mail/templates/deliveryAgentAssignment.mail';
 import { transporter } from '../mail/client';
 import { customerOrderStatusUpdateMail } from '../mail/templates/customerOrderStatusUpdate.mail';
+import { restaurantPayout } from '../mail/templates/restaurantPayout.mail';
+import { deliveryAgentPayout } from '../mail/templates/deliveryAgentPayout.mail';
 
 async function handleEmailCustomerConfirmation(event: Record<string, unknown>) {
   try {
@@ -162,8 +164,72 @@ async function handleEmailOrderStatusUpdate(event: Record<string, unknown>) {
   }
 }
 
+async function handleEmailRestaurantPayout(event: Record<string, unknown>) {
+  try {
+    const { recipent, payouts, order } = event as {
+      recipent: {
+        restaurant: {
+          id: string;
+          name: string;
+          email: string;
+          regNo: string;
+          accountNo: string;
+        };
+      };
+      payouts: {
+        restaurantPayout: number;
+        deliveryAgentPayout: number;
+      };
+      order: {
+        id: string;
+        customerId: string;
+        restaurantId: string;
+      };
+    };
+
+    console.log('Handling restaurant payout email event');
+
+    await transporter.sendMail(
+      restaurantPayout(recipent.restaurant, payouts, order),
+    );
+  } catch (error) {
+    console.error('Error handling email notification:', error);
+  }
+}
+
+async function handleEmailDeliveryAgentPayout(event: Record<string, unknown>) {
+  try {
+    const { recipent, payouts, order } = event as {
+      recipent: {
+        id: string;
+        name: string;
+        email: string;
+        regNo: string;
+        accountNo: string;
+      };
+      payouts: {
+        restaurantPayout: number;
+        deliveryAgentPayout: number;
+      };
+      order: {
+        id: string;
+        customerId: string;
+        restaurantId: string;
+      };
+    };
+
+    console.log('Handling delivery agent payout email event');
+
+    await transporter.sendMail(deliveryAgentPayout(recipent, payouts, order));
+  } catch (error) {
+    console.error('Error handling email notification:', error);
+  }
+}
+
 export {
   handleEmailCustomerConfirmation,
   handleEmailDeliveryAssignment,
   handleEmailOrderStatusUpdate,
+  handleEmailRestaurantPayout,
+  handleEmailDeliveryAgentPayout,
 };
